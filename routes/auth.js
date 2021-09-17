@@ -72,15 +72,13 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(401).json("Wrong password or username!");
+    !user && res.status(401).json("Wrong username!");
     !user.isActivated &&
       res.status(401).json("User is not activated, check your email!");
     const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
     const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
-
     originalPassword !== req.body.password &&
       res.status(401).json("Wrong password or username!");
-
     const accessToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
       expiresIn: "5d",
     });
