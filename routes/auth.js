@@ -7,8 +7,8 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-//const URL = "https://password-reset-link.netlify.app";
-const URL = "http://localhost:5000";
+const URL = "https://url-shortener-link.netlify.app";
+//const URL = "http://localhost:5000";
 
 const pass = "9791627920";
 const transporter = nodemailer.createTransport({
