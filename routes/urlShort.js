@@ -68,6 +68,16 @@ router.post("/create", async (req, res) => {
   }
 });
 
+// delete a url
+router.get("/delete/:id", async (req, res) => {
+  try {
+    const url = await UrlShort.findByIdAndDelete({ _id: req.params.id });
+    res.status(200).json({ message: "Url deleted successfully" });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 function generateUrl() {
   let rndResult = "";
   let characters =
